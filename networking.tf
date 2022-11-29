@@ -83,3 +83,38 @@ resource "aws_route_table_association" "private-RT-association" {
   subnet_id      = aws_subnet.terraform-private-subnet.*.id[count.index]
   route_table_id = aws_route_table.terraform-private-RT.id
 }
+//security group
+resource "aws_security_group" "terraform-sg" {
+  name        = "allow_subnet_instance"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    self        = true
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "allow_tls"
+  }
+}
+//port 22 allowed
+resource "aws_security_group_rule" "ssh_allow" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.terraform-sg.id
+}
