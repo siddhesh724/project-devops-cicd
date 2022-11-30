@@ -1,21 +1,21 @@
 #!/bin/bash
 # this is for ansible and jenkins
-sudo yum update -y
-sudo yum install wget -y
-sudo amazon-linux-extras install epel -y
-sudo amazon-linux-extras install ansible2 -y
-sudo yum install python3 -y
+yum update -y
+yum install wget -y
+amazon-linux-extras install epel -y
+amazon-linux-extras install ansible2 -y
+yum install python3 -y
 sleep 10
-sudo wget -O /etc/yum.repos.d/jenkins.repo \
+wget -O /etc/yum.repos.d/jenkins.repo \
     https://pkg.jenkins.io/redhat-stable/jenkins.repo
 sleep 10
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum upgrade -y
-sudo amazon-linux-extras install java-openjdk11 -y
-sudo yum install jenkins -y
-sudo yum install git tree -y
-sudo yum install java-devel -y
-sudo yum install fontconfig -y
-sudo systemctl enable jenkins
-sudo systemctl start jenkins
-sudo systemctl status jenkins
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum upgrade -y
+amazon-linux-extras install java-openjdk11 -y
+yum install jenkins -y
+yum install git tree -y
+yum install java-devel -y
+yum install fontconfig -y
+systemctl enable jenkins
+systemctl start jenkins
+systemctl status jenkins
