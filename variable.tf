@@ -31,5 +31,5 @@ variable "USER" {
 variable "EC2_COMPUTE" {
   type        = string
   description = "enter compute type"
-  default     = "t3.medium"
+  default     = "t3.micro"
 }

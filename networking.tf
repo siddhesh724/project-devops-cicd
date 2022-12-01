@@ -98,6 +98,24 @@ resource "aws_security_group" "terraform-sg" {
     self        = true
   }
 
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    self        = true
+  }
+
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    self        = true
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -106,15 +124,24 @@ resource "aws_security_group" "terraform-sg" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "terraform-sg"
   }
 }
 //port 22 allowed
-resource "aws_security_group_rule" "ssh_allow" {
+/* resource "aws_security_group_rule" "ssh_allow" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.terraform-sg.id
-}
+} */
+//port 80 allow
+/* resource "aws_security_group_rule" "http_allow" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.terraform-sg.id
+} */

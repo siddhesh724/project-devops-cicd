@@ -21,7 +21,7 @@ resource "aws_instance" "terraform-project-CICD-EC2" {
   key_name               = aws_key_pair.deployer.key_name
   subnet_id              = aws_subnet.terraform-public-subnet[0].id
   vpc_security_group_ids = [aws_security_group.terraform-sg.id]
-  user_data              = "${file("ansible-jenkins-user-data.sh")}"
+  user_data              = file("ansible-jenkins-user-data.sh")
 
   tags = {
     Name = "terraform-cicd"
@@ -56,7 +56,7 @@ resource "aws_instance" "terraform-project-web" {
   key_name               = aws_key_pair.deployer.key_name
   subnet_id              = aws_subnet.terraform-public-subnet[1].id
   vpc_security_group_ids = [aws_security_group.terraform-sg.id]
-  user_data              = "${file("docker-tomcat-user-data.sh")}"
+  user_data              = file("docker-tomcat-user-data.sh")
 
   tags = {
     Name = "terraform-web-hosting"
