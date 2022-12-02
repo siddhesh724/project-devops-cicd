@@ -3,7 +3,7 @@
 yum update -y
 yum install wget -y
 amazon-linux-extras install epel -y
-amazon-linux-extras install ansible2 -y
+# amazon-linux-extras install ansible2 -y
 yum install python3 -y
 sleep 10
 wget -O /etc/yum.repos.d/jenkins.repo \
